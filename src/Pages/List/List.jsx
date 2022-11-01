@@ -1,0 +1,102 @@
+import { useState } from 'react'
+import Task from '../../components/Tasks/Tasks'
+import * as C from './List.styles'
+import {useSelector, useDispatch} from 'react-redux'
+import { v4 as uuid } from 'uuid';
+import { actionEditTask, actionListCreactor, actionSaveDesc } from '../../redux/reducers/list.action';
+import { format } from '../../utils/data';
+
+
+
+const List = () => {
+  const list = useSelector((state) => state.list)
+  const dispatch = useDispatch()
+  const [value, setValue] = useState('')
+  const [edit, setEdit] = useState({edit:false, id: ''})
+  const [valueDesc, setValueDesc] = useState("")
+
+  const enterKey = (e) => {
+    if(value.length > 0 && e.code === 'Enter' && !edit.edit){
+      dispatch(actionListCreactor({
+        id: uuid(),
+        task: value,
+        done: false,
+        desc: '',
+        date: format()
+      }))
+      setValue('')
+    }
+
+    if(value.length > 0 && e.code === 'Enter' && edit.edit){
+      dispatch(actionEditTask({
+        id: edit.id,
+        task: value,
+        done: false,
+        desc: ''
+      }))
+     
+      setEdit({edit:false, id: ''})
+      setValue('')
+    }
+  }
+
+  const addTask = () => {
+    if(value.length > 0 && !edit.edit) {
+      dispatch(actionListCreactor({
+        id: uuid(),
+        task: value,
+        done: false,
+        desc: '',
+        date: format()
+      }))
+      setValue('')
+    }
+
+    if(value.length > 0 && edit.edit) {
+      dispatch(actionEditTask({
+        id: edit.id,
+        task: value,
+        done: false,
+        desc: ''
+      }))
+      
+      setEdit({edit:false, id: ''})
+      setValue('')
+    }  
+ 
+  }
+  const saveDesc = (id) => {
+    if(valueDesc.length > 0)
+    dispatch(actionSaveDesc({
+      id,
+      desc: valueDesc
+    }))
+  }
+
+
+  return (
+    <C.Container>
+      <C.addTask>
+      <div className='image'>➕</div>
+        <input 
+        type="text"
+        placeholder='Adicionar Tarefas'
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        onKeyUp={enterKey} /> 
+        <button onClick={addTask}>Adicionar</button>
+      </C.addTask>
+        {list.map((el, index) => <Task
+        key={el+index}
+        {...el}
+          setEdit={setEdit}
+          setValue={setValue}
+          edit={edit}
+          setValueDesc={setValueDesc}
+          saveDesc={saveDesc}
+          />)}
+    </C.Container>
+  )
+}
+
+export default  List
