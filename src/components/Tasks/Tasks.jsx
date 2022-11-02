@@ -8,7 +8,7 @@ import { IoArrowDownCircleOutline } from "react-icons/io5";
 import { actionDeleteTask } from '../../redux/reducers/list.action';
 
 
-const Task = ({task, done, id, date, setEdit, setValue, edit, setValueDesc, saveDesc}) => {
+const Task = ({task, done, id, date, desc, setEdit, setValue, edit, setValueDesc, saveDesc}) => {
  const [isDesc, setIsDesc] = useState(false)
 
   const dispatch = useDispatch()
@@ -59,7 +59,7 @@ const Task = ({task, done, id, date, setEdit, setValue, edit, setValueDesc, save
       </C.AreaTask>
      
       <C.Descricao isDesc={isDesc}>       
-         <textarea onChange={(e) => setValueDesc(e.target.value)} placeholder='Digite aqui...'></textarea>
+         <textarea onChange={(e) => setValueDesc(e.target.value)} value={desc} placeholder='Digite aqui...'></textarea>
          <button onClick={() => saveDesc(id)}>Save</button>
       </C.Descricao>  
       </>   

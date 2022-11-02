@@ -36,8 +36,10 @@ const listReduer = (state = INITIAL_STATE, action) => {
       return editTask
       
       case 'saveDesc':
+        console.log('aqui');
         const saveDesc = state.map((el) => {
           if(el.id === action.payload.id){
+            console.log('entrou');
             return {...el, desc: action.payload.desc}
           }
           return el
