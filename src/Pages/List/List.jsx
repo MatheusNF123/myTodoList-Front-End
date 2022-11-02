@@ -56,7 +56,7 @@ const List = () => {
  
   }
   const saveDesc = ({id, desc}) => {
-    if(desc.length > 0)
+   
     dispatch(actionSaveDesc({
       id,
       desc
