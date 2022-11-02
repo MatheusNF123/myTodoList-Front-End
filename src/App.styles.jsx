@@ -10,5 +10,5 @@ export const Container = styled.div`
 export const Area = styled.div`
   margin: auto;
   max-width: 1400px;
-  padding: 10px
+  padding: 10px;
 `

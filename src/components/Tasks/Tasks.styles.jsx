@@ -1,5 +1,38 @@
 import styled from "styled-components";
 
+export const ContainerAreaTask = styled.div`
+  width: 100%;
+  overflow-y: auto;
+  height: 78vh;
+
+
+  ::-webkit-scrollbar-track {
+    background-color: #7c81a8;
+}
+::-webkit-scrollbar {
+    width: 6px;
+    background: #7c81a8;
+}
+::-webkit-scrollbar-thumb {
+    background: #7c81a8;
+}
+  ::-moz-scrollbar-track {
+    background-color: #7c81a8;
+}
+::-moz-scrollbar {
+    width: 6px;
+    background: #7c81a8;
+}
+::-moz-scrollbar-thumb {
+    background: #7c81a8;
+}
+  
+  @media only screen and (max-width: 1000px){
+   
+  overflow-x: auto;
+  }
+`;
+
 export const AreaTask = styled.div(({done, edit, isDesc}) => (
   `display: flex;
   background-color: #20212c;
@@ -14,6 +47,7 @@ export const AreaTask = styled.div(({done, edit, isDesc}) => (
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 35%
   }
 
   input {
@@ -25,25 +59,29 @@ export const AreaTask = styled.div(({done, edit, isDesc}) => (
     color: #ccc;
     text-decoration: ${done ? 'line-through' : 'initial'};
     font-weigth: 18px;
-    width: 350px;
+    width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     height: 25px;     
     -webkit-line-clamp: 1; 
     -webkit-box-orient: vertical;
+    
   }
 
   .date{ 
     width: 200px;
     display: flex;
     justify-content: center;
+    width: 20%
   }
   .progress{
     display: flex;
     justify-content: center;
     width: 200px;
     color: ${done ? 'green' : 'yellow'};
+    width: 20%
+   
   }
 
   .buttns{
@@ -123,6 +161,10 @@ export const AreaTask = styled.div(({done, edit, isDesc}) => (
     transform: rotate(45deg);
     
   }
+
+  @media only screen and (max-width: 1000px){
+    width: 1000px
+  }
 `
 ));
 
@@ -162,13 +204,11 @@ button{
   visibility:${isDesc ? 'visible':'hidden'};
   width: fit-content;
   align-self: end;
-  // padding: 4px 15px;
   margin: 0px 30px 20px 0px;
   border-radius: 5px;
   background-color: transparent;
   color: #6cc0e5;
   border: none;
-  // font-weight: bold;
   font-size: 16px;
   transition: 0.1s;
 }

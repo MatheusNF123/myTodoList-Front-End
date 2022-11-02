@@ -1,38 +1,50 @@
-const INITIAL_STATE = []
+import { getLocalStorage, savaLocalArr } from "../../utils/localStorage"
+
+const INITIAL_STATE = getLocalStorage()
 
 const listReduer = (state = INITIAL_STATE, action) => {
   switch (action.type) { 
 
     case 'addList':
-     return [...state, {...action.payload}] 
+     const addList = [...state, {...action.payload}] 
+     savaLocalArr(addList)
+    return addList
 
      case "invertDone":
-      return state.map((task) => {
+      const invertDone = state.map((task) => {
         if(task.id === action.payload.id) {
           return {...task, done: !task.done}
         }
         return task
       })
+      savaLocalArr(invertDone)
+      return invertDone
 
      case "deleteTask":
-      return state.filter((task) => task.id !== action.payload.id )
+      const deleteTask = state.filter((task) => task.id !== action.payload.id )
+      savaLocalArr(deleteTask)
+      return deleteTask
 
      case "editTask":
-      return state.map((task) => {
+      const editTask = state.map((task) => {
         if(task.id === action.payload.id){
-          console.log('entrou');
           return {...task, ...action.payload}
         }
         return task
       })
+      savaLocalArr(editTask)
+      return editTask
       
       case 'saveDesc':
-        return state.map((el) => {
+        const saveDesc = state.map((el) => {
           if(el.id === action.payload.id){
             return {...el, desc: action.payload.desc}
           }
           return el
         })
+        savaLocalArr(saveDesc)
+        return saveDesc
+
       default:
         return [...state]
   }

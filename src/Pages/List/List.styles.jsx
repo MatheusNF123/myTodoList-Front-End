@@ -9,7 +9,6 @@ export const Container = styled.section`
 export const addTask = styled.div`
   display: flex;
   border: 1px solid #ccc;
-  /* padding: 4px; */
   border-radius: 50px;
   margin-bottom: 20px;
   overflow: hidden;
