@@ -14,7 +14,6 @@ const List = () => {
   const dispatch = useDispatch()
   const [value, setValue] = useState('')
   const [edit, setEdit] = useState({edit:false, id: ''})
-  const [valueDesc, setValueDesc] = useState("")
 
   const enterKey = (e) => {
     const _TASK = {
@@ -56,11 +55,11 @@ const List = () => {
     }  
  
   }
-  const saveDesc = (id) => {
-    if(valueDesc.length > 0)
+  const saveDesc = ({id, desc}) => {
+    if(desc.length > 0)
     dispatch(actionSaveDesc({
       id,
-      desc: valueDesc
+      desc
     }))
   }
 
@@ -84,9 +83,7 @@ const List = () => {
         setEdit={setEdit}
         setValue={setValue}
         edit={edit}
-        setValueDesc={setValueDesc}
         saveDesc={saveDesc}
-        
         />)}
          
         </ContainerAreaTask>  
