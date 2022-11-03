@@ -13,6 +13,10 @@ export const addTask = styled.div`
   margin-bottom: 20px;
   overflow: hidden;
 
+  :hover{
+    background-color: #1c1c27;
+  }
+
 
   input{
     border: none;
@@ -37,11 +41,12 @@ export const addTask = styled.div`
     border-left: 1px solid white;
     font-size: 16px;
     font-weight: bold;
-    transition: .4s
+    transition: .2s
   }
   button:hover{
-    background-color: #005a00
+    background-color: #003100
   }
+
 
   .image{
     display:flex;

@@ -43,6 +43,10 @@ export const AreaTask = styled.div(({done, edit, isDesc}) => (
   justify-content: space-between;
   z-index: 2;
 
+  :hover{
+    background-color: #232533;
+  }
+
   .checkboxLab{
     display: flex;
     justify-content: center;
@@ -66,7 +70,6 @@ export const AreaTask = styled.div(({done, edit, isDesc}) => (
     height: 25px;     
     -webkit-line-clamp: 1; 
     -webkit-box-orient: vertical;
-    
   }
 
   .date{ 
@@ -99,7 +102,11 @@ export const AreaTask = styled.div(({done, edit, isDesc}) => (
   .btnEdit{
     color: white;
     background-color: transparent;
-    margin-left: 8px;
+    margin-left: 8px;    
+    transition: .2s;
+  }
+  .btnEdit:hover,  .btnDelete:hover{
+    transform: scale(1.15);
   }
   .btnDelete{
     color:  ${edit.edit ? '#7c7c7c76' : '#920000'};
@@ -131,6 +138,7 @@ export const AreaTask = styled.div(({done, edit, isDesc}) => (
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+    
   }
   
   input[type="checkbox"] + label:last-child { margin-bottom: 0; }
