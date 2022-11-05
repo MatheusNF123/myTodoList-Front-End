@@ -8,8 +8,6 @@ export const Container = styled.div`
 `
 
 export const Area = styled.div`
-  /* margin: auto; */
-  /* width: 100%; */
   display: grid;
  grid-template-columns: 300px 1fr;
 column-gap: 20px;

@@ -2,31 +2,71 @@ import styled from "styled-components";
 
 export const Container = styled.aside`
  border: 2px solid black;
-
+  padding: 5px;
  
 `;
 
-export const Area = styled.section`
-  height: 100% ;
+export const AreaInput = styled.section`
   display: flex;
-  justify-content: center
+  justify-content: center;
+  width: 100%;
+  border-bottom: 1px solid #2b2b2b;
+  margin-bottom: 10px;
 `;
 
-export const Input = styled.input`
-margin-top: 10px;
-  width: 85%;
-  height: 18px;
-  padding: 10px;
-  font-size: 18px;
-  margin-bottom: 10px;
-  border-bottom: 2px solid white;
-  border: 1px solid black;
-  outline: none;
-  background-color: #1a1d30;
-  color: #bbb8b8;
-  border-radius: 5px;
+export const AreaListTask = styled.section`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  border: 1px solid red;
+`;
 
-  :active, :focus{
+export const DivInput = styled.div`
+   display: flex;
+   width: 100%;
+   align-items: center;
+   background-color: #1a1d30;
+   padding: 10px;
+   border-radius: 5px;
+   height: 18px;
+   border: 1px solid transparent;
+  margin-bottom: 5px;
+   /* :active, :focus{
     border: 1px solid #28315c;
+  } */
+`;
+
+export const InputText = styled.input`
+  width: 100%;  
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: #bbb8b8;
+ 
+
+  /* :active, :focus{
+    border: 1px solid #28315c;
+  } */
+`;
+
+export const buttonAdd = styled.button`
+  /* width: 30px;
+  height: 30px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  color: #a3a3a3;
+  font-size: 20px;
+  padding: 5px;
+  
+  :hover{
+    border-radius: 20px;
+    background-color: #a3a3a31f;
+  }
+  :active{
+    background-color: #cccccc1f;
   }
 `;
