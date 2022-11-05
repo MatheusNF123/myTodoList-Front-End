@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Task from '../../components/Tasks/Tasks'
 import * as C from './List.styles'
 import {useSelector, useDispatch} from 'react-redux'
@@ -10,7 +10,8 @@ import { ContainerAreaTask } from '../../components/Tasks/Tasks.styles';
 
 
 const List = () => {
-  const list = useSelector((state) => state.list)
+  const list = useSelector((state) => state.listFolder.listFolder)
+  const isActive = useSelector((state) => state.listFolder.isActive)
   const dispatch = useDispatch()
   const [value, setValue] = useState('')
   const [edit, setEdit] = useState({edit:false, id: ''})
@@ -63,6 +64,9 @@ const List = () => {
     }))
   }
 
+  useEffect(() => {
+    
+  })
 
   return (
     <C.Container>
@@ -77,7 +81,8 @@ const List = () => {
         <button onClick={addTask}>Adicionar</button>
       </C.addTask>  
       <ContainerAreaTask>
-        {list.map((el, index) =>  <Task
+       
+        {list.length > 0 && list.find((folder) => folder.id.includes(isActive)).listTask.map((el, index) =>  <Task
         key={el+index}
         {...el}
         setEdit={setEdit}

@@ -1,74 +1,88 @@
+import { getLocalStorage, savaLocalArr } from "../../utils/localStorage";
 
 
-const INITIAL_STATE = {isActive: '', listFolder: []}
+const INITIAL_STATE = getLocalStorage() 
+//  {isActive: '', listFolder: []}
 
 const listFolderReduer = (state = INITIAL_STATE, action) => {
-  console.log('aqui');
+ 
   switch (action.type) { 
 
     case 'addFolder':
      const addFolderList = {...state, listFolder: [...state.listFolder, action.payload] }  
+     savaLocalArr(addFolderList) 
     return addFolderList  
 
     case 'isActive':
-     const isActive = {...state, isActive: action.payload.id }  
+     const isActive = {...state, isActive: action.payload.id } 
+     savaLocalArr(isActive) 
     return isActive  
 
-    case 'addList':      
-     const addList = {...state, listFolder: [...state.listFolder.map((el) => {
-      if(el.id === state.isActive) {
-         el.listTask.push(action.payload)
-         return el
-      }
-      return el
-     })]} 
-    //  savaLocalArr(addList)
-    return addList
+    case 'addList':
+      const folderFilteredAddList = state.listFolder.find((el) => el.id === state.isActive)    
+      console.log(folderFilteredAddList)
+      folderFilteredAddList.listTask.push(action.payload) 
+      const returnArrayAddList = state.listFolder.map((folder) => folder.id === folderFilteredAddList.id ? folderFilteredAddList : folder)
+    //  const addList = {...state, listFolder: [...state.listFolder.map((el) => {
+    //   if(el.id === state.isActive) {
+    //      el.listTask.push(action.payload)
+    //      return el
+    //   }
+    //   return el
+    //  })]} 
+     savaLocalArr({...state, listFolder: [...returnArrayAddList]})
+    return {...state, listFolder: [...returnArrayAddList]}
 
     case "invertDone":
-      const folderFiltered = state.listFolder.find((el) => el.id === state.isActive)
-      folderFiltered.listTask.forEach((task) => {
+      console.log('invertDone');
+      const folderFiltered = state.listFolder.find((el) => el.id.includes(state.isActive))
+      const mapTask = folderFiltered.listTask.map((task) => {
         if(task.id === action.payload.id) {
-         task = {...task, done: !task.done}
+          console.log('dentro forEach');
+        return {...task, done: !task.done}
         }
-       
+       return task
       })
+      folderFiltered.listTask = [...mapTask]
       const returnArray = state.listFolder.map((folder) => folder.id === folderFiltered.id ? folderFiltered : folder)
       // savaLocalArr(invertDone)
+      savaLocalArr({...state, listFolder: [...returnArray]})
       return {...state, listFolder: [...returnArray]}
 
       case "deleteTask":
         const folderFilteredDelete = state.listFolder.find((el) => el.id === state.isActive)
       const deleteTask = folderFilteredDelete.listTask.filter((task) => task.id !== action.payload.id )
-      folderFilteredDelete.taskList = [...deleteTask]
+      folderFilteredDelete.listTask = [...deleteTask]
       const returnArrayDelete = state.listFolder.map((folder) => folder.id === folderFilteredDelete.id ? folderFilteredDelete : folder)
-      // savaLocalArr(deleteTask)
+      savaLocalArr({...state, listFolder: [...returnArrayDelete]})
       return {...state, listFolder: [...returnArrayDelete]}
 
       case "editTask":
-        const folderFilteredEdit = state.listFolder.find((el) => el.id === state.isActive)
-        folderFilteredEdit.listTask.forEach((task) => {
+        const folderFilteredEdit = state.listFolder.find((el) => el.id.includes(state.isActive))
+       const mapEdit = folderFilteredEdit.listTask.map((task) => {
           if(task.id === action.payload.id) {
-           task = {...task, task: action.payload}
+           return {...task, task: action.payload.task}
           }
-         
+         return task
         })
+        folderFilteredEdit.listTask = [...mapEdit]
         const returnArrayEdit = state.listFolder.map((folder) => folder.id === folderFilteredEdit.id ? folderFilteredEdit : folder)
-        // savaLocalArr(editTask)
+        savaLocalArr({...state, listFolder: [...returnArrayEdit]})
         return {...state, listFolder: [...returnArrayEdit]}
       
         case 'saveDesc':
           const folderFilteredSaveDesc = state.listFolder.find((el) => el.id === state.isActive)
       
-          folderFilteredSaveDesc.listTask.forEach((task) => {
+          const mapSaveDesc = folderFilteredSaveDesc.listTask.map((task) => {
             if(task.id === action.payload.id) {
-             task = {...task, desc: action.payload.desc}
+             return {...task, desc: action.payload.desc}
             }
-           
+           return task
           })
+          folderFilteredSaveDesc.listTask = [...mapSaveDesc]
           const returnArraySaveDesc = state.listFolder.map((folder) => folder.id === folderFilteredSaveDesc.id ? folderFilteredSaveDesc : folder)
          
-          // savaLocalArr(saveDesc)
+          savaLocalArr({...state, listFolder: [...returnArraySaveDesc]})
           return {...state, listFolder: [...returnArraySaveDesc]}
         
 
