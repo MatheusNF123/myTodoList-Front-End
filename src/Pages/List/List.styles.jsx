@@ -2,8 +2,11 @@ import styled from "styled-components";
 
 export const Container = styled.section`
   width: 100%;
-  display: flex;
-  flex-direction: column;
+  /* display: flex;
+  flex-direction: column; */
+  /* grid-area: content; */
+  width: 100%
+ 
 `;
 
 export const addTask = styled.div`
