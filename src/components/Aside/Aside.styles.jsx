@@ -14,13 +14,6 @@ export const AreaInput = styled.section`
   margin-bottom: 10px;
 `;
 
-export const AreaListTask = styled.section`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  border: 1px solid red;
-`;
-
 export const DivInput = styled.div`
    display: flex;
    width: 100%;
@@ -51,8 +44,6 @@ export const InputText = styled.input`
 `;
 
 export const buttonAdd = styled.button`
-  /* width: 30px;
-  height: 30px; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -69,4 +60,14 @@ export const buttonAdd = styled.button`
   :active{
     background-color: #cccccc1f;
   }
+`;
+
+
+export const AreaListTask = styled.section`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  /* border: 1px solid red; */
 `;
