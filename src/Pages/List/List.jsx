@@ -64,9 +64,9 @@ const List = () => {
     }))
   }
 
-  useEffect(() => {
-    
-  })
+  // useEffect(() => {
+  //   console.log(isActive);
+  // })
 
   return (
     <C.Container>
@@ -79,10 +79,9 @@ const List = () => {
         onChange={(e) => setValue(e.target.value)}
         onKeyUp={enterKey} /> 
         <button onClick={addTask}>Adicionar</button>
-      </C.addTask>  
-      <ContainerAreaTask>
-       
-        {list.length > 0 && list.find((folder) => folder.id.includes(isActive)).listTask.map((el, index) =>  <Task
+      </C.addTask> 
+      <ContainerAreaTask>       
+        {list.length > 0  && list.find((folder) => folder.id.includes(isActive))?.listTask.map((el, index) =>  <Task
         key={el+index}
         {...el}
         setEdit={setEdit}

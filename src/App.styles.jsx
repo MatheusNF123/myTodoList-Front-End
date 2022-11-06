@@ -10,7 +10,7 @@ export const Container = styled.div`
 export const Area = styled.div`
   display: grid;
  grid-template-columns: 300px 1fr;
-column-gap: 20px;
+column-gap: 10px;
 padding: 10px
 
 

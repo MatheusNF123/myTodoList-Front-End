@@ -1,8 +1,11 @@
 import styled from "styled-components";
 
 export const Container = styled.aside`
- border: 2px solid black;
+ border: 2px solid #1e212e;
   padding: 5px;
+  border-radius: 5px;
+  background-color: #191b24;
+  box-shadow: 0px 0px 10px #101218b7;
  
 `;
 
@@ -12,21 +15,26 @@ export const AreaInput = styled.section`
   width: 100%;
   border-bottom: 1px solid #2b2b2b;
   margin-bottom: 10px;
+
+ 
 `;
 
 export const DivInput = styled.div`
    display: flex;
    width: 100%;
    align-items: center;
-   background-color: #1a1d30;
+   /* background-color: #1a1d30; */
    padding: 10px;
    border-radius: 5px;
    height: 18px;
    border: 1px solid transparent;
   margin-bottom: 5px;
-   /* :active, :focus{
-    border: 1px solid #28315c;
-  } */
+
+  border: 1px solid #28315c;
+  :hover{
+    background-color: #1f1f2c
+  }
+  
 `;
 
 export const InputText = styled.input`
@@ -36,11 +44,9 @@ export const InputText = styled.input`
   outline: none;
   background-color: transparent;
   color: #bbb8b8;
- 
 
-  /* :active, :focus{
-    border: 1px solid #28315c;
-  } */
+
+  
 `;
 
 export const buttonAdd = styled.button`

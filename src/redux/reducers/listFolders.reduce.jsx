@@ -13,6 +13,11 @@ const listFolderReduer = (state = INITIAL_STATE, action) => {
      savaLocalArr(addFolderList) 
     return addFolderList  
 
+    case 'deleteFolder':
+     const deleteFoldert = {...state, listFolder: [...state.listFolder.filter((el) => el.id !== action.payload.id)]}
+     savaLocalArr(deleteFoldert) 
+    return deleteFoldert  
+
     case 'isActive':
      const isActive = {...state, isActive: action.payload.id } 
      savaLocalArr(isActive) 
@@ -20,16 +25,9 @@ const listFolderReduer = (state = INITIAL_STATE, action) => {
 
     case 'addList':
       const folderFilteredAddList = state.listFolder.find((el) => el.id === state.isActive)    
-      console.log(folderFilteredAddList)
       folderFilteredAddList.listTask.push(action.payload) 
       const returnArrayAddList = state.listFolder.map((folder) => folder.id === folderFilteredAddList.id ? folderFilteredAddList : folder)
-    //  const addList = {...state, listFolder: [...state.listFolder.map((el) => {
-    //   if(el.id === state.isActive) {
-    //      el.listTask.push(action.payload)
-    //      return el
-    //   }
-    //   return el
-    //  })]} 
+
      savaLocalArr({...state, listFolder: [...returnArrayAddList]})
     return {...state, listFolder: [...returnArrayAddList]}
 
