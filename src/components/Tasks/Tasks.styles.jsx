@@ -2,8 +2,9 @@ import styled from "styled-components";
 
 export const ContainerAreaTask = styled.div`
   width: 100%;
-  overflow-y: auto;
-  height: 78vh;
+  /* height: 100%; */
+  /* max-height: 88.5%; */
+  height: auto;
 
 
   ::-webkit-scrollbar-track {
@@ -14,7 +15,7 @@ export const ContainerAreaTask = styled.div`
     background: #7c81a8;
 }
 ::-webkit-scrollbar-thumb {
-    background: #7c81a8;
+    background: #222330;
 }
   ::-moz-scrollbar-track {
     background-color: #7c81a8;
@@ -24,13 +25,8 @@ export const ContainerAreaTask = styled.div`
     background: #7c81a8;
 }
 ::-moz-scrollbar-thumb {
-    background: #7c81a8;
+    background: #222330;
 }
-  
-  @media only screen and (max-width: 1000px){
-   
-  overflow-x: auto;
-  }
 `;
 
 export const AreaTask = styled.div(({done, edit, isDesc}) => (
@@ -42,6 +38,8 @@ export const AreaTask = styled.div(({done, edit, isDesc}) => (
   align-items: center;
   justify-content: space-between;
   z-index: 2;
+  width: 100%;
+  // height: 100%;
 
   :hover{
     background-color: #232533;
@@ -170,8 +168,9 @@ export const AreaTask = styled.div(({done, edit, isDesc}) => (
     
   }
 
-  @media only screen and (max-width: 1000px){
-    width: 1000px
+  @media only screen and (max-width: 700px){
+    max-width: 100%;
+    min-width: 700px;
   }
 `
 ));

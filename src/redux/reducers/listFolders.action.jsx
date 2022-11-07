@@ -1,0 +1,8 @@
+export const actionAddFolder = (payload) => ({type: 'addFolder', payload})
+export const actionIsActive = (payload) => ({type: 'isActive', payload})
+export const actionDeleteFolder = (id) => ({type: "deleteFolder", payload: {id}})
+export const actionListCreactor = (payload) => ({type:'addList', payload})
+export const actionInvertDone = (id) => ({type: 'invertDone', payload: {id}})
+export const actionDeleteTask = (id) => ({type: 'deleteTask', payload: {id}})
+export const actionEditTask = (payload) => ({type: 'editTask', payload})
+export const actionSaveDesc = ({id, desc}) => ({type: 'saveDesc', payload: {id, desc}})

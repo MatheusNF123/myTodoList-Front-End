@@ -6,14 +6,18 @@ import { v4 as uuid } from 'uuid';
 import { actionEditTask, actionListCreactor, actionSaveDesc } from '../../redux/reducers/list.action';
 import { format } from '../../utils/data';
 import { ContainerAreaTask } from '../../components/Tasks/Tasks.styles';
+import { verifyInputCreator, verifyInputEditor } from '../../utils/verifyInput';
+
 
 
 
 const List = () => {
-  const list = useSelector((state) => state.list)
+  const list = useSelector((state) => state.listFolder.listFolder)
+  const isActive = useSelector((state) => state.listFolder.isActive)
   const dispatch = useDispatch()
   const [value, setValue] = useState('')
   const [edit, setEdit] = useState({edit:false, id: ''})
+  const [message, setMessage] = useState("")
 
   const enterKey = (e) => {
     const _TASK = {
@@ -23,16 +27,28 @@ const List = () => {
       desc: '',
       date: format()
     }
-    if(value.length > 0 && e.code === 'Enter' && !edit.edit){
-      dispatch(actionListCreactor(_TASK))
-      setValue('')
+    if(e.code === 'Enter'){
+      const {errorC} = verifyInputCreator({value: value.length, list: list.length})
+      if(!edit.edit && errorC){
+        console.log(errorC)
+        setMessage(errorC)
+      }else if(!edit.edit && !errorC){
+        dispatch(actionListCreactor(_TASK))
+        setValue('')
+        setMessage('')
+      }
+
+      const {errorE} = verifyInputEditor({value: value.length})
+      if(edit.edit && errorE){
+        setMessage(errorE)
+      }else if(edit.edit && !errorE){
+        dispatch(actionEditTask({..._TASK, id: edit.id}))
+        setEdit({edit:false, id: ''})
+        setValue('')
+        setMessage('')
+      }
     }
 
-    if(value.length > 0 && e.code === 'Enter' && edit.edit){
-      dispatch(actionEditTask({..._TASK, id: edit.id}))
-      setEdit({edit:false, id: ''})
-      setValue('')
-    }
   }
 
   const addTask = () => {
@@ -43,16 +59,23 @@ const List = () => {
       desc: '',
       date: format()
     }
-    if(value.length > 0 && !edit.edit) {
+    const {errorE} = verifyInputEditor({value: value.length})
+    if(!edit.edit && errorE) {
+      setMessage(errorE)
+    }else if(!edit.edit && !errorE){
       dispatch(actionListCreactor(_TASK))
       setValue('')
+      setMessage('')
     }
 
-    if(value.length > 0 && edit.edit) {
+    if(edit.edit && errorE) {
+      setMessage(errorE)
+    } else if(edit.edit && !errorE){
       dispatch(actionEditTask({..._TASK, id: edit.id}))
       setEdit({edit:false, id: ''})
       setValue('')
-    }  
+      setMessage('')
+    } 
  
   }
   const saveDesc = ({id, desc}) => {
@@ -64,20 +87,24 @@ const List = () => {
   }
 
 
+
   return (
     <C.Container>
+      
+      <C.AreaInputAndMenu>
       <C.addTask>
       <div className='image'>➕</div>
-        <input 
+        <C.inputAddTarefa message={message} 
         type="text"
-        placeholder='Adicionar Tarefas'
+        placeholder={!message ? 'Adicionar Tarefas' : message}
         value={value}
         onChange={(e) => setValue(e.target.value)}
         onKeyUp={enterKey} /> 
         <button onClick={addTask}>Adicionar</button>
-      </C.addTask>  
-      <ContainerAreaTask>
-        {list.map((el, index) =>  <Task
+      </C.addTask>
+        </C.AreaInputAndMenu>
+      <ContainerAreaTask>       
+        {list.length > 0  && list.find((folder) => folder.id.includes(isActive))?.listTask.map((el, index) =>  <Task
         key={el+index}
         {...el}
         setEdit={setEdit}
@@ -86,7 +113,7 @@ const List = () => {
         saveDesc={saveDesc}
         />)}
          
-        </ContainerAreaTask>  
+        </ContainerAreaTask> 
     </C.Container>
   )
 }

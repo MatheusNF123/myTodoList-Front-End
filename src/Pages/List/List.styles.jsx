@@ -2,32 +2,40 @@ import styled from "styled-components";
 
 export const Container = styled.section`
   width: 100%;
+  overflow-x: auto;
+  background-color: #1c1c27;
+  padding: 10px; 
+  border-radius: 10px;
+  height: 100%;
+`;
+
+export const AreaInputAndMenu = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
+  /* align-items: center; */
+  /* margin-bottom: 10px; */
+  /* border: 2px solid red; */
+  height: 90px;
 `;
+
+// export const DivErrorMessage = styled.div`
+//   margin-left: 20px;
+//   color: #ff00006c;
+// `;
 
 export const addTask = styled.div`
   display: flex;
   border: 1px solid #ccc;
   border-radius: 50px;
-  margin-bottom: 20px;
   overflow: hidden;
+  align-items: center;
+  width: 100%;
 
   :hover{
     background-color: #1c1c27;
   }
 
-
-  input{
-    border: none;
-    width: 100%;
-    outline: none;
-    padding: 8px;
-    background-color: transparent;
-    color: white;
-    font-size: 18px;
-    
-  }
 
   button{
     border: none;
@@ -54,4 +62,23 @@ export const addTask = styled.div`
     align-items: center;
     margin-left: 15px;
   }
+
+  @media only screen and (max-width: 700px){
+    max-width: 100%;
+    min-width: 700px;
+  }
 `
+
+export const inputAddTarefa = styled.input(({message}) => (`
+  border: none;
+  width: 100%;
+  outline: none;
+  padding: 8px;
+  background-color: transparent;
+  color: white;
+  font-size: 18px;
+
+  ::placeholder {
+    color: ${!message ? '#9e9d9d93' : '#ff000055' };
+}
+`))
