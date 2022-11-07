@@ -14,15 +14,12 @@ export const AreaInputAndMenu = styled.div`
   flex-direction: column;
   width: 100%;
   /* align-items: center; */
-  /* margin-bottom: 10px; */
+  margin-bottom: 10px;
   /* border: 2px solid red; */
-  height: 90px;
+  /* height: 90px; */
 `;
 
-// export const DivErrorMessage = styled.div`
-//   margin-left: 20px;
-//   color: #ff00006c;
-// `;
+
 
 export const addTask = styled.div`
   display: flex;
