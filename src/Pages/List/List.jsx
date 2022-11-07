@@ -104,7 +104,7 @@ const List = () => {
       </C.addTask>
         </C.AreaInputAndMenu>
       <ContainerAreaTask>       
-        {list.length > 0  && list.find((folder) => folder.id.includes(isActive))?.listTask.map((el, index) =>  <Task
+        {list?.length > 0  && list.find((folder) => folder.id.includes(isActive))?.listTask.map((el, index) =>  <Task
         key={el+index}
         {...el}
         setEdit={setEdit}
