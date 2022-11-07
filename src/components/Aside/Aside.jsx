@@ -6,6 +6,7 @@ import { actionAddFolder, actionIsActive } from '../../redux/reducers/listFolder
 import { v4 as uuid } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux';
 import Mycontext from '../../Context/MyContext';
+import { verifyInputEditor } from '../../utils/verifyInput';
 
 const Aside = () => {
   const listFolder = useSelector((state) => state.listFolder)
@@ -13,17 +14,25 @@ const Aside = () => {
   const dispatch = useDispatch()
   const idFolder = useSelector((state) => state.listFolder.isActive)
   const {menuOpen} = useContext(Mycontext)
+const [message, setMessage] = useState('')
+
   const enterKey = (e) => {
     const foolder = {
       id: uuid(),
       nameFolder: valueInputListFolder,
       listTask: []
     }
-    if(e.code === "Enter" && valueInputListFolder.length){
-      dispatch(actionAddFolder(foolder))
-      dispatch(actionIsActive({id: foolder.id}))
-      setValueInputList('')
-    }
+    if(e.code === "Enter"){
+     const {errorE} = verifyInputEditor({value: valueInputListFolder.length > 0})
+     if(!errorE){
+       dispatch(actionAddFolder(foolder))
+       dispatch(actionIsActive({id: foolder.id}))
+       setValueInputList('')
+       setMessage('')
+     }else if(errorE){
+       setMessage(errorE)
+     }
+   }
   }
 
   const addFolderList = () => {
@@ -32,17 +41,19 @@ const Aside = () => {
       nameFolder: valueInputListFolder,
       listTask: []
     }
-    if(valueInputListFolder.length > 0) {
+    const {errorE} = verifyInputEditor({value: valueInputListFolder.length > 0})
+    if(!errorE) {
       dispatch(actionAddFolder(foolder))
       dispatch(actionIsActive({id: foolder.id}))
       setValueInputList('')
-
+      setMessage('')
+    }else if(errorE){
+      setMessage(errorE)
     }
   }
 
 const nextActive = (index) => {
   if(index > 0){
-    console.log('aqui?');
     dispatch(actionIsActive({id: listFolder.listFolder[index - 1].id}))
   }
 }
@@ -52,8 +63,9 @@ const nextActive = (index) => {
       <C.AreaInput>
 
         <C.DivInput>
-          <C.InputText type="text"
-           placeholder='Adicionar Pasta'
+          <C.InputText message={message}
+          type="text"
+           placeholder={!message ? 'Adicionar Pasta' : message}
             value={valueInputListFolder}
              onChange={(e) => setValueInputList(e.target.value)}
              onKeyUp={enterKey}/>

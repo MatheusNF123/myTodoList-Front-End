@@ -69,7 +69,8 @@ export const DivInput = styled.div`
   
 `;
 
-export const InputText = styled.input`
+export const InputText = styled.input(({message})=> (
+  `
   width: 100%;  
   font-size: 18px;
   border: none;
@@ -78,8 +79,11 @@ export const InputText = styled.input`
   color: #bbb8b8;
   height: 20px;
 
+  ::placeholder {
+    color: ${!message ? '#9e9d9d93' : '#ff000055' };
   
-`;
+`
+))
 
 export const buttonAdd = styled.button`
   display: flex;

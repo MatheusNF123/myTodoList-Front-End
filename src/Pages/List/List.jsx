@@ -6,6 +6,7 @@ import { v4 as uuid } from 'uuid';
 import { actionEditTask, actionListCreactor, actionSaveDesc } from '../../redux/reducers/list.action';
 import { format } from '../../utils/data';
 import { ContainerAreaTask } from '../../components/Tasks/Tasks.styles';
+import { verifyInputCreator, verifyInputEditor } from '../../utils/verifyInput';
 
 
 
@@ -16,6 +17,7 @@ const List = () => {
   const dispatch = useDispatch()
   const [value, setValue] = useState('')
   const [edit, setEdit] = useState({edit:false, id: ''})
+  const [message, setMessage] = useState("")
 
   const enterKey = (e) => {
     const _TASK = {
@@ -25,16 +27,28 @@ const List = () => {
       desc: '',
       date: format()
     }
-    if(value.length > 0 && e.code === 'Enter' && !edit.edit && list.length){
-      dispatch(actionListCreactor(_TASK))
-      setValue('')
+    if(e.code === 'Enter'){
+      const {errorC} = verifyInputCreator({value: value.length, list: list.length})
+      if(!edit.edit && errorC){
+        console.log(errorC)
+        setMessage(errorC)
+      }else if(!edit.edit && !errorC){
+        dispatch(actionListCreactor(_TASK))
+        setValue('')
+        setMessage('')
+      }
+
+      const {errorE} = verifyInputEditor({value: value.length})
+      if(edit.edit && errorE){
+        setMessage(errorE)
+      }else if(edit.edit && !errorE){
+        dispatch(actionEditTask({..._TASK, id: edit.id}))
+        setEdit({edit:false, id: ''})
+        setValue('')
+        setMessage('')
+      }
     }
 
-    if(value.length > 0 && e.code === 'Enter' && edit.edit && list.length){
-      dispatch(actionEditTask({..._TASK, id: edit.id}))
-      setEdit({edit:false, id: ''})
-      setValue('')
-    }
   }
 
   const addTask = () => {
@@ -45,16 +59,23 @@ const List = () => {
       desc: '',
       date: format()
     }
-    if(value.length > 0 && !edit.edit && list.length) {
+    const {errorE} = verifyInputEditor({value: value.length})
+    if(!edit.edit && errorE) {
+      setMessage(errorE)
+    }else if(!edit.edit && !errorE){
       dispatch(actionListCreactor(_TASK))
       setValue('')
+      setMessage('')
     }
 
-    if(value.length > 0 && edit.edit && list.length) {
+    if(edit.edit && errorE) {
+      setMessage(errorE)
+    } else if(edit.edit && !errorE){
       dispatch(actionEditTask({..._TASK, id: edit.id}))
       setEdit({edit:false, id: ''})
       setValue('')
-    }  
+      setMessage('')
+    } 
  
   }
   const saveDesc = ({id, desc}) => {
@@ -69,12 +90,13 @@ const List = () => {
 
   return (
     <C.Container>
+      
       <C.AreaInputAndMenu>
       <C.addTask>
       <div className='image'>➕</div>
-        <input 
+        <C.inputAddTarefa message={message} 
         type="text"
-        placeholder='Adicionar Tarefas'
+        placeholder={!message ? 'Adicionar Tarefas' : message}
         value={value}
         onChange={(e) => setValue(e.target.value)}
         onKeyUp={enterKey} /> 
