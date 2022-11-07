@@ -77,7 +77,7 @@ const nextActive = (index) => {
       </C.AreaInput>
 
       <C.AreaListTask>
-      {listFolder.listFolder.map((folder, index) => <ListTask
+      {listFolder.listFolder?.map((folder, index) => <ListTask
        key={index + folder.nameFolder}
         {...folder}      
         idFolder={idFolder}
