@@ -32,13 +32,18 @@ export const ButtonMenuMobile = styled.button`
   justify-content: center;
   align-items: center;
   background-color: #ffffff49;
-  display: none;
-  
+  display: flex;
+  position: absolute;
+  transform: translateX(-50px);
+  transition: .2s;
+
   :hover{
     background-color: #ffffff65;
   }
 
   @media only screen and (max-width: 850px){   
-    display: flex;
+   
+    position: relative;
+  transform: translateX(0px);
    }
 `;

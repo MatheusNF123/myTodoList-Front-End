@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { FcFolder } from "react-icons/fc";
 import Task from '../../components/Tasks/Tasks'
 import * as C from './List.styles'
 import {useSelector, useDispatch} from 'react-redux'
