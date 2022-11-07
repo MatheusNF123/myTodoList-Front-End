@@ -2,16 +2,29 @@ import styled from "styled-components";
 
 export const Container = styled.section`
   width: 100%;
-  width: 100%;
- 
+  overflow-x: auto;
+  background-color: #1c1c27;
+  padding: 10px; 
+  border-radius: 10px;
+  height: 100%;
 `;
+
+export const AreaInputAndMenu = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  margin-bottom: 10px;
+`;
+
+
 
 export const addTask = styled.div`
   display: flex;
   border: 1px solid #ccc;
   border-radius: 50px;
-  margin-bottom: 20px;
   overflow: hidden;
+  align-items: center;
+  width: 100%;
 
   :hover{
     background-color: #1c1c27;
@@ -53,5 +66,10 @@ export const addTask = styled.div`
     justify-content: center;
     align-items: center;
     margin-left: 15px;
+  }
+
+  @media only screen and (max-width: 700px){
+    max-width: 100%;
+    min-width: 700px;
   }
 `

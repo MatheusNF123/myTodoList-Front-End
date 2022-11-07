@@ -10,7 +10,7 @@ const ListTask = ({nameFolder, id, idFolder, index, nextActive}) => {
   
   return (
     <C.divContainer id={id} idFolder={idFolder}>
-      <C.ContentListTask onClick={() => dispatch(actionIsActive({id}))} id={id} idFolder={idFolder}>
+      <C.ContentListTask onClick={() => dispatch(actionIsActive({id}))}>
   
         <C.divImg>
           <C.img src='https://cdn-icons-png.flaticon.com/512/235/235251.png'/>

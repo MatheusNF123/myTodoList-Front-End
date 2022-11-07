@@ -23,8 +23,7 @@ export const divContainer = styled.div(({idFolder, id}) => (
 `
 ))
 
-export const ContentListTask = styled.button(({idFolder, id}) => (
-  `
+export const ContentListTask = styled.button `
   display: flex;
   padding: 5px;
   width: 100%;
@@ -38,7 +37,6 @@ export const ContentListTask = styled.button(({idFolder, id}) => (
   }
 
 `
-))
 
 export const divImg = styled.div`
   display: flex;
@@ -70,7 +68,6 @@ export const DeleteInput = styled.div`
 display: flex;
 font-size: 20px;
 color: #535353;
-/* position: fixed; */
 visibility: hidden;
 z-index: 10;
 :hover{

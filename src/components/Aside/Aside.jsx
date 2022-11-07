@@ -1,17 +1,18 @@
 import ListTask from '../ListTask/ListFolderTask'
 import * as C from './Aside.styles'
 import { BiFolderPlus } from "react-icons/bi";
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { actionAddFolder, actionIsActive } from '../../redux/reducers/listFolders.action';
 import { v4 as uuid } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux';
+import Mycontext from '../../Context/MyContext';
 
 const Aside = () => {
   const listFolder = useSelector((state) => state.listFolder)
   const [valueInputListFolder, setValueInputList] = useState('')
   const dispatch = useDispatch()
   const idFolder = useSelector((state) => state.listFolder.isActive)
-
+  const {menuOpen} = useContext(Mycontext)
   const enterKey = (e) => {
     const foolder = {
       id: uuid(),
@@ -47,7 +48,7 @@ const nextActive = (index) => {
 }
 
   return (
-    <C.Container>
+    <C.Container menuOpen={menuOpen}>
       <C.AreaInput>
 
         <C.DivInput>
