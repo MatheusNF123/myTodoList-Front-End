@@ -37,10 +37,9 @@ export const AreaTask = styled.div(({done, edit, isDesc}) => (
   margin-bottom: 10px;
   align-items: center;
   justify-content: space-between;
-  z-index: 2;
+  z-index: 5;
   width: 100%;
   // height: 100%;
-
   :hover{
     background-color: #232533;
   }
@@ -178,7 +177,8 @@ export const AreaTask = styled.div(({done, edit, isDesc}) => (
 
 export const Descricao = styled.div(({isDesc}) => (`
 display: flex;
-width: 99.3%;
+width: 99.4%;
+
 flex-direction: column;
 height: ${isDesc ? '180px':'0px'};
 transition: 0.3s;
@@ -192,6 +192,12 @@ border-bottom-right-radius: 20px;
 border-bottom-left-radius: 20px;
 border: 2px solid  #20223a;
 margin: auto;
+border-top: none;
+
+@media only screen and (max-width: 850px){
+  max-width: 100%;
+    min-width: 700px; 
+}
 
 textarea{
   visibility:${isDesc ? 'visible':'hidden'};
