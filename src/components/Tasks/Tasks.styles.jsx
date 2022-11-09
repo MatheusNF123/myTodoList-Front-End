@@ -83,12 +83,6 @@ export const AreaTask = styled.div(({done, edit, isDesc}) => (
   }
 
 
-
-
-
-
-
-
   input[type="checkbox"] { display: none; }
   
   input[type="checkbox"] + label {
