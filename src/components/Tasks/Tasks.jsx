@@ -6,7 +6,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { FaRegEdit } from "react-icons/fa";
 import { IoArrowDownCircleOutline } from "react-icons/io5";
 import { actionDeleteTask } from '../../redux/reducers/list.action';
-
+import Button from './Button';
 
 const Task = ({task, done, id, date, desc, setEdit, setValue, edit, saveDesc}) => {
  const [isDesc, setIsDesc] = useState(false)
@@ -40,28 +40,25 @@ const Task = ({task, done, id, date, desc, setEdit, setValue, edit, saveDesc}) =
         <div className='date'>{date}</div>
         <div className='progress'>{done ? 'Done': 'inProgress'}</div>
 
-        <div className='buttns'>
+        <C.DivButtns isDesc={isDesc} edit={edit}>
+          <Button estilo={'btnDesc'} func={() => setIsDesc(!isDesc)}>
+          <IoArrowDownCircleOutline/>
+          </Button>
 
-          <button className='btnDesc' onClick={() => setIsDesc(!isDesc)}>
-            <IoArrowDownCircleOutline/>
-          </button>
+          <Button estilo={'btnEdit'} func={editTask}>
+          <FaRegEdit/>
+          </Button>
 
-          <button className='btnEdit' onClick={editTask}>
-            <FaRegEdit/>
-          </button>
+          <Button estilo={'btnDelete'} func={deleteTask} disable={true}>
+          <RiDeleteBin6Line/>
+          </Button>
 
-          <button  disabled={edit.edit ? true : false}
-            className='btnDelete'
-            onClick={deleteTask}>
-            <RiDeleteBin6Line/>
-          </button>
-
-        </div>           
+        </C.DivButtns>           
       </C.AreaTask>
      
       <C.Descricao isDesc={isDesc}>       
          <textarea onChange={(e) => setValueDesc(e.target.value)} value={valueDesc} placeholder='Digite aqui...'></textarea>
-         <button onClick={() => saveDesc({id, desc: valueDesc})}>Save</button>
+         <Button func={() => saveDesc({id, desc: valueDesc})}>Save</Button>
       </C.Descricao>  
       </>   
       

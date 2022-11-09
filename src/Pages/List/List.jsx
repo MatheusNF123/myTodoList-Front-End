@@ -30,8 +30,8 @@ const List = () => {
     if(e.code === 'Enter'){
       const {errorC} = verifyInputCreator({value: value.length, list: list.length})
       if(!edit.edit && errorC){
-        console.log(errorC)
         setMessage(errorC)
+        setValue('')
       }else if(!edit.edit && !errorC){
         dispatch(actionListCreactor(_TASK))
         setValue('')
@@ -41,6 +41,7 @@ const List = () => {
       const {errorE} = verifyInputEditor({value: value.length})
       if(edit.edit && errorE){
         setMessage(errorE)
+        setValue('')
       }else if(edit.edit && !errorE){
         dispatch(actionEditTask({..._TASK, id: edit.id}))
         setEdit({edit:false, id: ''})
@@ -59,17 +60,21 @@ const List = () => {
       desc: '',
       date: format()
     }
-    const {errorE} = verifyInputEditor({value: value.length})
-    if(!edit.edit && errorE) {
-      setMessage(errorE)
-    }else if(!edit.edit && !errorE){
+    const {errorC} = verifyInputCreator({value: value.length, list: list.length})   
+    if(!edit.edit && errorC) {
+      setMessage(errorC)
+      setValue('')
+    }else if(!edit.edit && !errorC){
+
       dispatch(actionListCreactor(_TASK))
       setValue('')
       setMessage('')
     }
 
+    const {errorE} = verifyInputEditor({value: value.length})
     if(edit.edit && errorE) {
       setMessage(errorE)
+      setValue('')
     } else if(edit.edit && !errorE){
       dispatch(actionEditTask({..._TASK, id: edit.id}))
       setEdit({edit:false, id: ''})

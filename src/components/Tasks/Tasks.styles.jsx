@@ -2,8 +2,6 @@ import styled from "styled-components";
 
 export const ContainerAreaTask = styled.div`
   width: 100%;
-  /* height: 100%; */
-  /* max-height: 88.5%; */
   height: auto;
 
 
@@ -84,40 +82,9 @@ export const AreaTask = styled.div(({done, edit, isDesc}) => (
    
   }
 
-  .buttns{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
 
-  button{
-    font-size: 20px;
-    background-color: transparent;
-    border: none;    
-  }
 
-  .btnEdit{
-    color: white;
-    background-color: transparent;
-    margin-left: 8px;    
-    transition: .2s;
-  }
-  .btnEdit:hover,  .btnDelete:hover{
-    transform: scale(1.15);
-  }
-  .btnDelete{
-    color:  ${edit.edit ? '#7c7c7c76' : '#920000'};
-    background-color: transparent;
-  }
-  .btnDesc{
-    color: white;
-    background-color: transparent;
-    font-size: 24px;
-    display: flex;
-    transform: ${isDesc ? 'rotate(-180deg)' : 'rotate(0deg)'};
-    transition: .8s
 
-  }
 
 
 
@@ -174,7 +141,45 @@ export const AreaTask = styled.div(({done, edit, isDesc}) => (
 `
 ));
 
+export const DivButtns = styled.div(({isDesc, edit}) => (
+  `  
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    
+    
+    button{
+    font-size: 20px;
+    background-color: transparent;
+    border: none;    
+  }
 
+  .btnEdit{
+    color: white;
+    background-color: transparent;
+    margin-left: 8px;    
+    transition: .2s;
+  }
+  .btnEdit:hover,  .btnDelete:hover{
+    transform: scale(1.15);
+  }
+  .btnDelete{
+    color:  ${edit.edit ? '#7c7c7c76' : '#920000'};
+    background-color: transparent;
+  }
+  .btnDesc{
+    color: white;
+    background-color: transparent;
+    font-size: 24px;
+    display: flex;
+    transform: ${isDesc ? 'rotate(-180deg)' : 'rotate(0deg)'};
+    transition: .8s
+
+  }
+
+`
+
+))
 export const Descricao = styled.div(({isDesc}) => (`
 display: flex;
 width: 99.4%;
