@@ -13,21 +13,29 @@ export const AreaInputAndMenu = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  /* align-items: center; */
-  margin-bottom: 10px;
-  /* border: 2px solid red; */
-  /* height: 90px; */
+  margin-bottom: 0px;
+  height: 90px;
+
+
+  .form-error-name{
+  color: #850000;
+  margin-left: 10px;
+  font-size: 14px;
+  
+}
 `;
 
 
 
 export const addTask = styled.div`
   display: flex;
-  border: 1px solid #ccc;
-  border-radius: 50px;
+  border: 1px solid ${props => props.edit ? 'rgba(55, 255, 20, 0.589)' : '#ccc'};
+  transition: .4s;
+  border-radius: 10px;
   overflow: hidden;
   align-items: center;
   width: 100%;
+  margin-bottom: 5px;
 
   :hover{
     background-color: #1c1c27;
@@ -36,7 +44,7 @@ export const addTask = styled.div`
 
   button{
     border: none;
-    border-radius: 50px;
+    border-radius: 10px;
     color: #fff;
     padding: 4px 10px;
     width: 100px;
@@ -64,9 +72,8 @@ export const addTask = styled.div`
     max-width: 100%;
     min-width: 700px;
   }
-`
 
-export const inputAddTarefa = styled.input(({message}) => (`
+.form-field-name{
   border: none;
   width: 100%;
   outline: none;
@@ -74,8 +81,6 @@ export const inputAddTarefa = styled.input(({message}) => (`
   background-color: transparent;
   color: white;
   font-size: 18px;
-
-  ::placeholder {
-    color: ${!message ? '#9e9d9d93' : '#ff000055' };
 }
-`))
+
+`

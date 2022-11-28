@@ -1,26 +1,25 @@
 import * as C from './Tasks.styles'
 import {useDispatch} from "react-redux"
-import { actionInvertDone } from '../../redux/reducers/list.action'
+import { actionDeleteTaskThunk, actionEditInProgressThunk } from '../../../../redux/reducers/task.action'
 import { useState } from 'react'
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { FaRegEdit } from "react-icons/fa";
 import { IoArrowDownCircleOutline } from "react-icons/io5";
-import { actionDeleteTask } from '../../redux/reducers/list.action';
 import Button from './Button';
 
-const Task = ({task, done, id, date, desc, setEdit, setValue, edit, saveDesc}) => {
+const Task = ({name, inProgress, id, date, descricao, setEdit, setValue, edit, saveDesc}) => {
  const [isDesc, setIsDesc] = useState(false)
- const [valueDesc, setValueDesc] = useState(desc)
+ const [valueDesc, setValueDesc] = useState(descricao)
 
   const dispatch = useDispatch()
 
 
   const deleteTask = () => {
-    dispatch(actionDeleteTask(id))
+    dispatch(actionDeleteTaskThunk(id))
   }
 
  const editTask = () => {
-  setValue(task)
+  setValue({name: name})
   setEdit({edit: true, id})
  }
   
@@ -28,17 +27,17 @@ const Task = ({task, done, id, date, desc, setEdit, setValue, edit, saveDesc}) =
 
   return (
     <>
-      <C.AreaTask done={done} edit={edit} isDesc={isDesc}>    
+      <C.AreaTask done={inProgress} edit={edit} isDesc={isDesc}>    
       <div className='checkboxLab'> 
         <input type="checkbox"
         id={id}
-        checked={done}
-        onChange={() => {dispatch(actionInvertDone(id))}}
+        checked={inProgress}
+        onChange={() => {dispatch(actionEditInProgressThunk(id))}}
         disabled={edit.edit ? true : false}/>
-        <label htmlFor={id}>{task}</label>
+        <label htmlFor={id}>{name}</label>
       </div>     
         <div className='date'>{date}</div>
-        <div className='progress'>{done ? 'Done': 'inProgress'}</div>
+        <div className='progress'>{inProgress ? 'Done': 'inProgress'}</div>
 
         <C.DivButtns isDesc={isDesc} edit={edit}>
           <Button estilo={'btnDesc'} func={() => setIsDesc(!isDesc)}>
@@ -58,7 +57,7 @@ const Task = ({task, done, id, date, desc, setEdit, setValue, edit, saveDesc}) =
      
       <C.Descricao isDesc={isDesc}>       
          <textarea onChange={(e) => setValueDesc(e.target.value)} value={valueDesc} placeholder='Digite aqui...'></textarea>
-         <Button func={() => saveDesc({id, desc: valueDesc})}>Save</Button>
+         <Button func={() => saveDesc({id, descricao: valueDesc, date, inProgress, name})}>Save</Button>
       </C.Descricao>  
       </>   
       
