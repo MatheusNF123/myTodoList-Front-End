@@ -1,6 +1,6 @@
 import * as C from "./Message.styles"
 
-const Message = ({registerComSucesso}) => {
+const Message = ({registerComSucesso, messages}) => {
   return (
     <C.Container registerComSucesso={registerComSucesso}>
       <h4>Cadastro realizado com sucesso!</h4>

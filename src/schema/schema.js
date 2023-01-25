@@ -3,13 +3,13 @@ import * as yup from "yup"
 export const validationRegister = yup.object().shape({
   username: yup.string().min(2, "Username deve ter 2 caracteres no mínimo").required("Este campo é obrigatório"),
   email: yup.string().email("Não e um email valido").required("Este campo é obrigatório"),
-  password: yup.string().min(6, "A senha deve ter 8 caracteres no mínimo").required("Este campo é obrigatório"),
+  password: yup.string().min(6, "A senha deve ter 6 caracteres no mínimo").required("Este campo é obrigatório"),
   confirmPassword: yup.string().oneOf([yup.ref("password"),null], "As senhas não são iguais")
 })
 
 export const validationLogin = yup.object().shape({
   email: yup.string().email("Não e um email valido").required("Este campo é obrigatório"),
-  password: yup.string().min(6, "A senha deve ter 8 caracteres").required("Este campo é obrigatório"),
+  password: yup.string().min(6, "A senha deve ter 6 caracteres").required("Este campo é obrigatório"),
 })
 
 export const validateNameTask = yup.object().shape({

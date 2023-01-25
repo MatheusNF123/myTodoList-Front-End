@@ -25,7 +25,11 @@ export const actionDeleteFolderThunk = (id, ide) => async (dispatch) => {
 
 
 export const actionCreateFolderThunk = (folder) => async (dispatch) => {
- const newFolder = await createFolder(folder)
-  dispatch(actionAddFolder({...newFolder, tasks: []}))
-  dispatch(actionIsActive({id: newFolder.id}))
+  try {
+    const newFolder = await createFolder(folder)
+     dispatch(actionAddFolder({...newFolder, tasks: []}))
+     dispatch(actionIsActive({id: newFolder.id}))    
+  } catch (error) {
+    console.log('createfolder', error?.message);    
+  }
 }

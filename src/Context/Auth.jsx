@@ -4,7 +4,6 @@ import { useMemo } from "react";
 import { useCallback } from "react";
 import { createContext } from "react";
 import authTokenUser from "../services/user/authUser";
-import loginRequest from "../services/user/login";
 import {
   getUserLocalStorage,
   setUserLocalStorage,
@@ -32,35 +31,38 @@ export const AuthProvider = ({ children }) => {
   }  
   }, []);
 
-  // useEffect(() => {
-  //   const userLocal = getUserLocalStorage();
-  
-  //   const validateLocal = async () => {
 
-  //   const valid = await authTokenUser(userLocal?.token || null)
-    
-  //   if (userLocal && valid === 'OK') {
-  //     setUser(userLocal);
-  //   }else{
-  //     setUser(null)
+  const authenticate = useCallback(async (infoUser, call) => {
+    try {
+          const {status, data} = await call(infoUser);
+          if(status !== 200 && status !== 201) {
+            setUser(null)
+            return {err: true, data}
+          }
+          const payload = { token: data.token, email: data.email, user: data.userName };
+          setUser(payload);
+          setUserLocalStorage(payload);
+          return {err: false}         
+        }catch(e){
+          alert('Erro inesperado! Tente novamente mais tarde.')
+        }
+    }, []);
+
+  // const authenticate = useCallback(async (email, password) => {
+  //   try {
+  //     const {status, data} = await loginRequest(email, password);
+  //     if(status !== 200) {
+  //       setUser(null)
+  //       return {err: true}
+  //     }
+  //     const payload = { token: data.token, email: data.email, user: data.userName };
+  //     setUser(payload);
+  //     setUserLocalStorage(payload);
+  //     return {err: false}
+  //   }catch(e){
+  //     alert('Erro inesperado! Tente novamente mais tarde.')
   //   }
-  // }
- 
-  // if(userLocal?.token){
-  //   validateLocal()
-  // }else{
-  //   setUser(null)
-  // }
-  
   // }, []);
-
-  const authenticate = useCallback(async (email, password) => {
-    const request = await loginRequest(email, password);
-    console.log("---------", 'autenticando', request);
-    const payload = { token: request.token, email: request.email, user: request.userName };
-    setUser(payload);
-    setUserLocalStorage(payload);
-  }, []);
 
   const logout = useCallback(() => {
     setUser(null);

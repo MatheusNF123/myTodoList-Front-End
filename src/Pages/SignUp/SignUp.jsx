@@ -1,27 +1,46 @@
 import { ErrorMessage, Field, Formik, Form } from "formik"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import registerRequest from "../../services/user/register"
 import * as C from "./Signup.styles"
 import {validationRegister} from "../../schema/schema"
 import image2 from "../../assets/image2.jpg"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import Message from "../../components/Message/Message"
+import { AuthContext } from "../../Context/Auth"
 
 const SignUp = ()=> {
+  const auth = useContext(AuthContext);
   const [registerComSucesso, setRegisterComSucesso] = useState(true)
-  const [message, setMessage] = useState(false)
+  const navigate = useNavigate();
 
-  const handleOnSubmitRegister = async (values, actions) => {    
-    const data = await registerRequest(values.username, values.email, values.password)
-    if(data?.email){
-      setRegisterComSucesso(false)
-      actions.resetForm()
-      setMessage(false)
-          setTimeout(() => setRegisterComSucesso(true), 1000);
-        }else{        
-          setMessage(true)
-        }
+  const handleOnSubmitRegister = async (values, actions) => {  
+    // try {      
+    //   const {status, data} = await registerRequest(values.username, values.email, values.password)
+    //   if(status !== 200) {
+    //     setRegisterComSucesso(false)
+    //     actions.resetForm()
+    //     setMessage(false)
+    //         setTimeout(() => setRegisterComSucesso(true), 1000);
+    //         setTimeout(() => navigate("/login"), 2000);
+    //       }else{        
+    //         setMessage(true)
+    //       }
+    // } catch (error) {
+    //   alert('Erro inesperado! Tente novamente mais tarde.')
+    // }  
      
+    const {err, data} = await auth.authenticate({username: values.username, email: values.email, password: values.password}, registerRequest);
+    if(err){
+      return actions.setErrors({email: data.message}); 
+    }       
+            setRegisterComSucesso(false)
+                  setTimeout(() => {
+                    setRegisterComSucesso(true)
+                    navigate("/home");
+                  }, 1000);
+           
+          
+      return
   
   }
 
@@ -51,7 +70,7 @@ return(
     
       <Form className="form-register">
       <C.DivRegisterFormGroup >
-          <Field name="username" type="text" className="form-field" placeholder="username"/>
+          <Field name="username" type="text" className="form-field" placeholder="Username"/>
 
           <ErrorMessage  component="span"
           name="username"
@@ -63,13 +82,9 @@ return(
 
           <ErrorMessage component="span"
           name="email"
-          className="form-error" render={(msg) => {
-            if(msg){
-              setMessage(false)
-            }
-            return  <span className="form-error">{msg}</span>
-          }} />
-         {message && <span className="form-error">Email já cadastrado</span>}
+          className="form-error"
+          />
+       
         </C.DivRegisterFormGroup>
         <C.DivRegisterFormGroup >
           <Field name="password" type="password" className="form-field" placeholder="Senha"/>

@@ -22,12 +22,12 @@ const ListTask = ({name, id, idFolder, index, nextActive, list}) => {
     setShow(true)
   }
 
+
   useEffect(() => {
     if(!idFolder){
       dispatch(actionIsActive({id: list?.listFolder[0]?.id || 0}))    
     }
-
-  },[dispatch])
+  },[list?.listFolder, idFolder, dispatch])
   
   return (
     <C.divContainer id={id} idFolder={idFolder}>
