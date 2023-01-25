@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.section`
   width: 100%;
   overflow-x: auto;
-  background-color: #1c1c27;
+  background-color: #181820;
   padding: 10px; 
   border-radius: 10px;
   height: 100%;

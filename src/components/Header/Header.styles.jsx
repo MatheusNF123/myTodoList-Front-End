@@ -4,11 +4,11 @@ export const Container = styled.header`
 box-sizing: border-box;
   width: 100%;
   font-weight: bold;
-  border-bottom: 2px solid #797A81;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   height: 80px;
   display: flex;
   align-items: center;
+  background-color: #191b24;
 
   h1{
     text-align: center;
@@ -105,7 +105,8 @@ export const ButtonSair = styled.button`
    background-color: transparent;
    color: white;
    border: none;
-   border-radius: 15px;
+   border-radius: 10px;
+   background-color: #222230;
    transition: .1s;
 
    :hover{

@@ -33,7 +33,6 @@ const listFolderReduer = (state = INITIAL_STATE, action) => {
       const folderFiltered = state.listFolder.find((el) => el.id === state.isActive )
       const mapTask = folderFiltered.tasks.map((task) => {
         if(task.id === action.payload.id) {
-          console.log('dentro forEach');
         return {...task, inProgress: !task.inProgress}
         }
        return task

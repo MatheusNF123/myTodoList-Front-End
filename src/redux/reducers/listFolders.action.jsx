@@ -13,23 +13,35 @@ export const actionGetAllFolder = (payload) => ({type: 'getAllFolder', payload})
 export const actionGetAllFoldersThunk = () => async (dispatch) => {
   const token = getUserLocalStorage()?.token || null
   if(!token) return
-  const folders = await getAllFolders(token)
-  dispatch(actionGetAllFolder(folders))
+  try {
+    const { data: folders, status } = await getAllFolders(token)
+    if (status !== 200) return console.log('getFolder', folders);
+    dispatch(actionGetAllFolder(folders))
+  } catch {
+    alert('Erro interno, volte mais tarde!')  
+  }
+
 
 }
 
-export const actionDeleteFolderThunk = (id, ide) => async (dispatch) => {
-  await deleteFolder(id)
+export const actionDeleteFolderThunk = (id) => async (dispatch) => {
+  try {  
+    const { data, status } = await deleteFolder(id)
+    if (status !== 200) return console.log('deleteFolder', data);
   dispatch(actionDeleteFolder(id))
+  } catch (e) {
+    alert('Erro interno, volte mais tarde!')  
+  }
 }
 
 
 export const actionCreateFolderThunk = (folder) => async (dispatch) => {
   try {
-    const newFolder = await createFolder(folder)
+    const { data: newFolder, status } = await createFolder(folder)
+    if (status !== 201) return console.log('createfolder', newFolder);
      dispatch(actionAddFolder({...newFolder, tasks: []}))
      dispatch(actionIsActive({id: newFolder.id}))    
   } catch (error) {
-    console.log('createfolder', error?.message);    
+    alert('Erro interno, volte mais tarde!')  
   }
 }

@@ -11,24 +11,46 @@ export const actionSaveDesc = ({id, desc}) => ({type: 'saveDesc', payload: {id, 
 
 
 export const actionCreateTaskThunk = (task, id) => async (dispatch) => {
-  const newTask = await createTask(task, id)
-   dispatch(actionListCreator(newTask))
+  try {
+    const {data: newTask, status} = await createTask(task, id)
+    if(status !== 201) return console.log("createtask", newTask)
+     dispatch(actionListCreator(newTask))
+    
+  } catch {
+    alert('Erro interno, volte mais tarde!')
+  }
  }
 
 
 export const actionDeleteTaskThunk = (id) => async (dispatch) => {
-  await deleteFolder(id)
-   dispatch(actionDeleteTask(id))
+  try {
+    const { data, status } = await deleteFolder(id)
+    if(status !== 204) return console.log("deleteTask", data)
+     dispatch(actionDeleteTask(id))
+  } catch (error) {
+    alert('Erro interno, volte mais tarde!')
+  }
  }
 
  
 export const actionEditTaskThunk = (task) => async (dispatch) => {
-  await editTask(task)
-   dispatch(actionEditTask(task))
+  try {
+   const { data, status } = await editTask(task)
+    if(status !== 200) return console.log("editTask", data)
+     dispatch(actionEditTask(task))
+  } catch {
+    alert('Erro interno, volte mais tarde!')
+  }
  }
 
 
 export const actionEditInProgressThunk = (id) => async (dispatch) => {
-  await inProgressTask(id)
-   dispatch(actionInvertDone(id))
+  try {
+    const { data, status } = await inProgressTask(id)
+    if(status !== 200) return console.log("editInprogress", data)
+     dispatch(actionInvertDone(id))
+    
+  } catch (error) {
+    alert('Erro interno, volte mais tarde!')
+  }
  }

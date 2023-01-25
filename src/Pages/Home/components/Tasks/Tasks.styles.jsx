@@ -29,15 +29,14 @@ export const ContainerAreaTask = styled.div`
 
 export const AreaTask = styled.div(({done, edit, isDesc}) => (
   `display: flex;
-  background-color: #20212c;
+  background-color: #1d1e29;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 5px;
   margin-bottom: 10px;
   align-items: center;
   justify-content: space-between;
   z-index: 5;
   width: 100%;
-  // height: 100%;
   :hover{
     background-color: #232533;
   }
@@ -176,7 +175,7 @@ export const DivButtns = styled.div(({isDesc, edit}) => (
 ))
 export const Descricao = styled.div(({isDesc}) => (`
 display: flex;
-width: 99.4%;
+width: 100%;
 
 flex-direction: column;
 height: ${isDesc ? '180px':'0px'};
