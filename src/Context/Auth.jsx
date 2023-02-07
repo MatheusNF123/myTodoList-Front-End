@@ -17,12 +17,18 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(false)
 
   const validateLocal = async (payload) => {
-    const valid = await authTokenUser(payload?.token || null)    
+    try{
+        const valid = await authTokenUser()    
     if (payload && valid === 'OK') {      
       setUser(payload);
     }else{
       setUser(null)
+      throw new Error('Usuário não autenticado.');
     }
+    }catch{
+      return alert('Houve um erro interno, volte mais tarde!')
+    }
+  
   }
  
   useEffect(() => {
