@@ -43,6 +43,7 @@ npm start
 - Redux;
 - React-icons
 - uuid;
+- styled-components
 
 
 ## Autor 
