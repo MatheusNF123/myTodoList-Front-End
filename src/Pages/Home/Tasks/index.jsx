@@ -1,6 +1,6 @@
 import {useState } from 'react'
 import ListTask from './ListTasks'
-import * as C from './Tasks.styles'
+import * as C from './index.styles'
 import {useSelector, useDispatch} from 'react-redux'
 import { actionCreateTaskThunk, actionEditTaskThunk } from '../../../redux/reducers/task.action';
 import { format } from '../../../utils/data';

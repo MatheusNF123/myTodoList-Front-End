@@ -1,7 +1,7 @@
 import { ErrorMessage, Field, Formik, Form } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import registerRequest from "../../services/user/register";
-import * as C from "./Signup.styles";
+import * as C from "./index.styles";
 import { validationRegister } from "../../schema/schema";
 import image2 from "../../assets/image2.jpg";
 import { useContext, useState } from "react";

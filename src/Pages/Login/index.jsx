@@ -4,7 +4,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import image1 from "../../assets/image1.png";
 import { AuthContext } from "../../Context/Auth";
 import { validationLogin } from "../../schema/schema";
-import * as C from "./Login.styles";
+import * as C from "./index.styles";
 import loginRequest from "../../services/user/login";
 import Loading from "../../components/Loading/Loading";
 

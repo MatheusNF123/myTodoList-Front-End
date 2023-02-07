@@ -1,5 +1,5 @@
 import ListFolders from "./ListFolders";
-import * as C from "./Folders.styles";
+import * as C from "./index.styles";
 import { BiFolderPlus } from "react-icons/bi";
 import { useContext, useState } from "react";
 import {
