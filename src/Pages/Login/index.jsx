@@ -11,24 +11,23 @@ import Loading from "../../components/Loading/Loading";
 const Login = () => {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false)
 
   if (auth.authUser) {
     return <>{<Navigate to={"/home"} replace={true} />}</>;
   }
 
   const handleOnSubmitLogin = async (values, er) => {
-    setLoading(true);
+    auth?.setLoading(true);
     const { err, data } = await auth.authenticate(
       { email: values.email, password: values.password },
       loginRequest
     );
     if (err) {
       er.setErrors({ email: data.message, password: data.message });
-      setLoading(false);
+      auth?.setLoading(false);
       return;
     }
-    setLoading(false);
+    auth?.setLoading(false);
     navigate("/home");
   };
 
@@ -80,7 +79,7 @@ const Login = () => {
               />
             </C.DivLoginFormGroup>
             <C.ButtonLogin type="submit" className="button-login">
-              { loading ? <Loading/> : 'Login'}
+              { auth?.loading ? <Loading/> : 'Login'}
             </C.ButtonLogin>
             
             <span className="form-span-inscrever">Não Tem Uma Conta?</span>{" "}

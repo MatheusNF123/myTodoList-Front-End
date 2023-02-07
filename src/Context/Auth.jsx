@@ -14,7 +14,8 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
- 
+  const [loading, setLoading] = useState(false)
+
   const validateLocal = async (payload) => {
     const valid = await authTokenUser(payload?.token || null)    
     if (payload && valid === 'OK') {      
@@ -44,25 +45,10 @@ export const AuthProvider = ({ children }) => {
           setUserLocalStorage(payload);
           return {err: false}         
         }catch(e){
+          setLoading(false)
           alert('Erro inesperado! Tente novamente mais tarde.')
         }
     }, []);
-
-  // const authenticate = useCallback(async (email, password) => {
-  //   try {
-  //     const {status, data} = await loginRequest(email, password);
-  //     if(status !== 200) {
-  //       setUser(null)
-  //       return {err: true}
-  //     }
-  //     const payload = { token: data.token, email: data.email, user: data.userName };
-  //     setUser(payload);
-  //     setUserLocalStorage(payload);
-  //     return {err: false}
-  //   }catch(e){
-  //     alert('Erro inesperado! Tente novamente mais tarde.')
-  //   }
-  // }, []);
 
   const logout = useCallback(() => {
     setUser(null);
@@ -72,7 +58,7 @@ export const AuthProvider = ({ children }) => {
   const authUser = useMemo(() => !!user, [user]);
 
   return (
-    <AuthContext.Provider value={{ ...user, authUser, authenticate, logout }}>
+    <AuthContext.Provider value={{ ...user, authUser, authenticate, logout, loading, setLoading }}>
       {children}
     </AuthContext.Provider>
   );
