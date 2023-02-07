@@ -1,20 +1,18 @@
-import * as C from './App.styles'
-import Header from './components/Header/Header';
-import List from './Pages/List/List';
-import Aside from './components/Aside/Aside';
-import Provider from './Context/Provider';
+import { BrowserRouter } from "react-router-dom";
+import { AuthProvider } from "./Context/Auth";
+import Provider from "./Context/Provider";
+
+import AppRoutes from "./routes";
 
 function App() {
   return (
     <Provider>
-      <C.Container>
-          <Header />
-          <C.Area>
-            <Aside/>
-            <List/>
-          </C.Area>
-      </C.Container>
-   </Provider>
+      <AuthProvider>
+        <BrowserRouter>
+          <AppRoutes />
+        </BrowserRouter>
+      </AuthProvider>
+    </Provider>
   );
 }
 
