@@ -1,5 +1,5 @@
-import ListTask from "../components/ListTask/ListFolderTask";
-import * as C from "./Aside.styles";
+import ListFolders from "./ListFolders";
+import * as C from "./Folders.styles";
 import { BiFolderPlus } from "react-icons/bi";
 import { useContext, useState } from "react";
 import {
@@ -12,7 +12,7 @@ import Mycontext from "../../../Context/MyContext";
 import { Field, Form, Formik } from "formik";
 import { validateNameFolder } from "../../../schema/schema";
 
-const Aside = () => {
+const Folders = () => {
   const listFolder = useSelector((state) => state.listFolder);
   const [valueInputListFolder, setValueInputList] = useState({ name: "" });
   const dispatch = useDispatch();
@@ -81,7 +81,7 @@ const Aside = () => {
 
       <C.AreaListTask>
         {listFolder.listFolder?.map((folder, index) => (
-          <ListTask
+          <ListFolders
             key={index + folder.name}
             {...folder}
             idFolder={idFolder}
@@ -95,4 +95,4 @@ const Aside = () => {
   );
 };
 
-export default Aside;
+export default Folders;

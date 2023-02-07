@@ -1,7 +1,7 @@
 import * as C from "./Home.styles";
 import Header from "../../components/Header/Header";
-import List from "./List/List";
-import Aside from "./Aside/Aside";
+import Tasks from "./Tasks/Tasks";
+import Folders from "./Folders/Folders";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { actionGetAllFoldersThunk } from "../../redux/reducers/listFolders.action";
@@ -17,8 +17,8 @@ const Home = () => {
     <C.Container>
       <Header />
       <C.Area>
-        <Aside />
-        <List />
+        <Folders />
+        <Tasks />
       </C.Area>
     </C.Container>
   );

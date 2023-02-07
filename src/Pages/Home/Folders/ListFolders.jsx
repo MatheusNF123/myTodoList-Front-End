@@ -2,13 +2,13 @@ import { useDispatch } from "react-redux";
 import {
   actionDeleteFolderThunk,
   actionIsActive,
-} from "../../../../redux/reducers/listFolders.action";
+} from "../../../redux/reducers/listFolders.action";
 import { VscClose } from "react-icons/vsc";
-import * as C from "./ListFolderTask.styles";
+import * as C from "./ListFolders.styles";
 import { useEffect } from "react";
-import Modal from "../../../../components/Modal/Modal";
+import Modal from "../../../components/Modal/Modal";
 import { useState } from "react";
-import ButtonModal from "../../../../components/Modal/ButtonModal";
+import ButtonModal from "../../../components/Modal/ButtonModal";
 
 const ListTask = ({ name, id, idFolder, index, nextActive, list }) => {
   const dispatch = useDispatch();

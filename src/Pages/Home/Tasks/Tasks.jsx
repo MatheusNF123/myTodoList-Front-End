@@ -1,17 +1,17 @@
 import {useState } from 'react'
-import Task from './../components/Tasks/Tasks'
-import * as C from './List.styles'
+import ListTask from './ListTasks'
+import * as C from './Tasks.styles'
 import {useSelector, useDispatch} from 'react-redux'
 import { actionCreateTaskThunk, actionEditTaskThunk } from '../../../redux/reducers/task.action';
 import { format } from '../../../utils/data';
-import { ContainerAreaTask } from '../components/Tasks/Tasks.styles';
+import { ContainerAreaTask } from './ListTasks.styles';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { validateNameTask } from '../../../schema/schema';
 
 
 
 
-const List = () => {
+const Tasks = () => {
   const list = useSelector((state) => state.listFolder.listFolder)
   const isActive = useSelector((state) => state.listFolder.isActive)
   const dispatch = useDispatch()
@@ -84,7 +84,7 @@ const List = () => {
         </Formik>
         </C.AreaInputAndMenu>
       <ContainerAreaTask>  
-        {list?.length > 0  && list.find((folder) => folder.id === isActive)?.tasks.map((el, index) =>  <Task
+        {list?.length > 0  && list.find((folder) => folder.id === isActive)?.tasks.map((el, index) =>  <ListTask
         key={el.name+index}
         {...el}
         setEdit={setEdit}
@@ -98,4 +98,4 @@ const List = () => {
   )
 }
 
-export default  List
+export default  Tasks

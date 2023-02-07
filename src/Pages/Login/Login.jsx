@@ -1,55 +1,37 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import image1 from "../../assets/image1.png";
 import { AuthContext } from "../../Context/Auth";
 import { validationLogin } from "../../schema/schema";
 import * as C from "./Login.styles";
 import loginRequest from "../../services/user/login";
+import Loading from "../../components/Loading/Loading";
 
 const Login = () => {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false)
 
   if (auth.authUser) {
     return <>{<Navigate to={"/home"} replace={true} />}</>;
   }
 
   const handleOnSubmitLogin = async (values, er) => {
-    // await auth.authenticate(values.email, values.password);
-    // navigate("/home");
-
+    setLoading(true);
     const { err, data } = await auth.authenticate(
       { email: values.email, password: values.password },
       loginRequest
     );
     if (err) {
       er.setErrors({ email: data.message, password: data.message });
+      setLoading(false);
       return;
     }
+    setLoading(false);
     navigate("/home");
   };
 
-  //  const {err} = await auth.authenticate(values.email, values.password);
-  //  if(err){
-  //   er.setErrors({email: 'asdasdasdaaa'})
-  //   return
-  //  }
-  //   navigate("/home");
-  // try {
-  //   const {status, data} = await loginRequest(values.email, values.password);
-  //   if(status !== 200) {
-  //     er.setErrors({email: 'asdasdasdaaa'})
-  //     auth.setUser(null);
-  //     return
-  //   }
-  //   const payload = { token: data.token, email: data.email, user: data.userName };
-  //   auth.setUser(payload);
-  //   setUserLocalStorage(payload);
-  //   navigate("/home");
-  // }catch(e){
-  //   alert('Erro inesperado! Tente novamente mais tarde.')
-  // }
 
   return (
     <C.Container className="container">
@@ -97,12 +79,10 @@ const Login = () => {
                 className="form-error"
               />
             </C.DivLoginFormGroup>
-            {/* <C.DivFormRedefinir>
-              <Link to="/signup" className="form-redefinir">Esqueceu a senha?</Link>
-            </C.DivFormRedefinir> */}
             <C.ButtonLogin type="submit" className="button-login">
-              Login
+              { loading ? <Loading/> : 'Login'}
             </C.ButtonLogin>
+            
             <span className="form-span-inscrever">Não Tem Uma Conta?</span>{" "}
             <Link className="form-link-inscrever" to="/signup">
               Inscrever-se

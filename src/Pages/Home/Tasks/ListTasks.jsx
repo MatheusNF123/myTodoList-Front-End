@@ -1,16 +1,16 @@
-import * as C from "./Tasks.styles";
+import * as C from "./ListTasks.styles";
 import { useDispatch } from "react-redux";
 import {
   actionDeleteTaskThunk,
   actionEditInProgressThunk,
-} from "../../../../redux/reducers/task.action";
+} from "../../../redux/reducers/task.action";
 import { useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { FaRegEdit } from "react-icons/fa";
 import { IoArrowDownCircleOutline } from "react-icons/io5";
 import Button from "./Button";
 
-const Task = ({
+const ListTasks = ({
   name,
   inProgress,
   id,
@@ -86,4 +86,4 @@ const Task = ({
   );
 };
 
-export default Task;
+export default ListTasks;

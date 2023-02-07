@@ -7,14 +7,16 @@ import image2 from "../../assets/image2.jpg";
 import { useContext, useState } from "react";
 import Message from "../../components/Message/Message";
 import { AuthContext } from "../../Context/Auth";
+import Loading from "../../components/Loading/Loading";
 
 const SignUp = () => {
+  const [loading, setLoading] = useState(false)
   const auth = useContext(AuthContext);
   const [registerComSucesso, setRegisterComSucesso] = useState(true);
   const navigate = useNavigate();
 
   const handleOnSubmitRegister = async (values, actions) => {
-
+    setLoading(true);
     const { err, data } = await auth.authenticate(
       {
         username: values.username,
@@ -24,8 +26,10 @@ const SignUp = () => {
       registerRequest
     );
     if (err) {
+      setLoading(false);
       return actions.setErrors({ email: data.message });
     }
+    setLoading(false);
     setRegisterComSucesso(false);
     setTimeout(() => {
       setRegisterComSucesso(true);
@@ -113,11 +117,11 @@ const SignUp = () => {
               />
             </C.DivRegisterFormGroup>
             <C.ButtonCadastro type="submit" className="button-login">
-              Cadastrar
+            { loading ? <Loading/> : 'Cadastrar'}
             </C.ButtonCadastro>
             <span className="form-span-register">Já Tem Uma Conta?</span>{" "}
             <Link className="form-link-register" to="/login">
-              Fazer Login
+              'Fazer Login'
             </Link>
           </Form>
         </Formik>
