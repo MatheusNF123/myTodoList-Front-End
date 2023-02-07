@@ -8,6 +8,7 @@ export const actionInvertDone = (id) => ({type: 'invertDone', payload: {id}})
 export const actionDeleteTask = (id) => ({type: 'deleteTask', payload: {id}})
 export const actionEditTask = (payload) => ({type: 'editTask', payload})
 export const actionSaveDesc = ({id, desc}) => ({type: 'saveDesc', payload: {id, desc}})
+export const actionReset = () => ({type: 'reset'})
 
 
 export const actionCreateTaskThunk = (task, id) => async (dispatch) => {

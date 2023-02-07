@@ -5,6 +5,8 @@ const listFolderReduer = (state = INITIAL_STATE, action) => {
  
   switch (action.type) { 
 
+    case "reset":  
+      return {state: INITIAL_STATE}
     case "getAllFolder":
       const getAllFolder = {...state, listFolder: [...action.payload]}
   

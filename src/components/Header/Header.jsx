@@ -7,9 +7,11 @@ import { MdLogout } from "react-icons/md";
 import { BiUserCircle } from "react-icons/bi";
 import { AuthContext } from '../../Context/Auth';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 const Header = () => {
   const auth = useContext(AuthContext);
+  const dispatch = useDispatch()
   const {menuOpen, setMenuOpen} = useContext(Mycontext)
 const navigate = useNavigate()
   const openMenuFolder = () => {
@@ -17,6 +19,7 @@ const navigate = useNavigate()
   }
 
 const logout = () => {
+  dispatch({type: "reset"})
   auth?.logout()
   navigate('/login')
 }
