@@ -20,10 +20,8 @@ Api.interceptors.response.use(function (response) {
 
 Api.interceptors.request.use(
   config => {
-    // Get the token from local storage or any other means
     const token = getUserLocalStorage()?.token || null
 
-    // If there's a token, add it to the Authorization header
     if (token) {
       config.headers.Authorization = token;
     }

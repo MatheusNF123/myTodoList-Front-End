@@ -1,11 +1,8 @@
 import { Api } from "../api/api";
 
-const authTokenUser = async () => {
- 
+const authTokenUser = async () => { 
     const {data} = await Api.get("auth");
-
-      return data;
-
+    return data;
 };
 
 export default authTokenUser;
