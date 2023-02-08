@@ -2,7 +2,13 @@
 
 my-Todo-List, uma aplicação onde você podera salvar tarefas do dia dia para não se esquecer. Além disso, poderá organizar por pastas, remover ou editar uma tarefa, ate adicionar uma descrição.
 
-Aplicação: https://my-todo-list-nu-one.vercel.app/
+### Aplicação: https://my-todo-list-nu-one.vercel.app/
+
+
+
+frontend repositório: https://github.com/MatheusNF123/myTodoList-Front-End
+
+backend repositório: https://github.com/MatheusNF123/myTodoList-Back-End
 
 ### imagem Desktop
 ![Captura de tela de 2022-11-08 10-02-03](https://user-images.githubusercontent.com/99821267/200576210-ed70e425-dba2-4767-b3a9-028a038336d1.png)
